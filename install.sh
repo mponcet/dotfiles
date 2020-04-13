@@ -40,7 +40,7 @@ cp vimrc ~/.vimrc
 mkdir -p ~/.vim/files/{backup,undo,swap}
 
 # vimplugins:
-mkdir -p ~/.vim/pack/plugins/start
+mkdir -p ~/.vim/pack/plugins/{start,opt}
 
 package_add https://github.com/joshdick/onedark.vim.git opt
 package_add https://github.com/itchyny/lightline.vim.git start
