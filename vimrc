@@ -1,7 +1,6 @@
 set nocompatible
 
 filetype plugin indent on
-syntax on
 
 set autoindent
 set noexpandtab
@@ -53,10 +52,10 @@ nnoremap <c-b> :Buffers<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " onedark & lightline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-packadd! onedark.vim
-colorscheme onedark
+syntax on
+colorscheme nord
 let g:lightline = {
-    \ 'colorscheme': 'onedark',
+    \ 'colorscheme': 'nord',
     \ }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
