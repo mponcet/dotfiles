@@ -55,3 +55,4 @@ package_add https://github.com/vim-syntastic/syntastic.git start
 package_add https://github.com/pearofducks/ansible-vim.git start
 package_add https://github.com/Vimjas/vim-python-pep8-indent.git start
 package_add https://github.com/ntpeters/vim-better-whitespace start
+package_add https://github.com/rust-lang/rust.vim start
