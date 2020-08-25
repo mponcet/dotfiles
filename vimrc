@@ -29,6 +29,7 @@ set undofile
 set undodir     =$HOME/.vim/files/undo/
 set viminfo     ='100,n$HOME/.vim/files/info/viminfo
 
+set mouse=a
 let mapleader="\<Space>""
 nnoremap <Leader>n :bnext<CR>
 nnoremap <Leader>p :bprevious<CR>
