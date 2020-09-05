@@ -35,10 +35,6 @@ else
     git -C ~/.liquidprompt pull
 fi
 
-# tilix
-mkdir -p ~/.config/tilix/schemes
-wget https://raw.githubusercontent.com/arcticicestudio/nord-tilix/develop/src/json/nord.json -O ~/.config/tilix/schemes/nord.json
-
 # vim:
 cp vimrc ~/.vimrc
 mkdir -p ~/.vim/files/{backup,undo,swap}
@@ -46,7 +42,7 @@ mkdir -p ~/.vim/files/{backup,undo,swap}
 # vimplugins:
 mkdir -p ~/.vim/pack/plugins/{start,opt}
 
-package_add https://github.com/arcticicestudio/nord-vim opt
+package_add https://github.com/kaicataldo/material.vim opt
 package_add https://github.com/itchyny/lightline.vim.git start
 package_add https://github.com/preservim/nerdtree.git start
 package_add https://github.com/vivien/vim-linux-coding-style.git start

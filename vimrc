@@ -51,13 +51,11 @@ nnoremap <c-p> :FZF<cr>
 nnoremap <c-b> :Buffers<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" onedark & lightline
+" colorscheme & lightline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
-colorscheme nord
-let g:lightline = {
-    \ 'colorscheme': 'nord',
-    \ }
+colorscheme material
+let g:lightline = { 'colorscheme': 'material' }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " syntastic
