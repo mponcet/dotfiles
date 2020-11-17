@@ -18,7 +18,7 @@ export PATH
 # User specific aliases and functions
 
 function _update_ps1() {
-    PS1="$($GOPATH/bin/powerline-go -error $? -hostname-only-if-ssh -cwd-max-depth 3 -modules venv,user,host,ssh,cwd,perms,git,hg,jobs,exit,root,aws,kube,terraform-workspace)"
+    PS1="$($GOPATH/bin/powerline-go -error $? -hostname-only-if-ssh -mode compatible -cwd-mode dironly -modules venv,user,host,ssh,cwd,perms,git,hg,jobs,exit,root,aws,kube,terraform-workspace)"
 }
 
 if [ "$TERM" != "linux" ] && [ -f "$GOPATH/bin/powerline-go" ]; then
