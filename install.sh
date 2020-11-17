@@ -11,7 +11,7 @@ package_add()
     if [ -d "$package_dir" ]
     then
         echo Updating $package_dir
-        git -C $package_dir pull 1>/dev/null
+        git -C $package_dir pull --ff-only 1>/dev/null
     else
         echo Cloning $repo_url to $package_dir
         git clone $repo_url $package_dir 1>/dev/null
