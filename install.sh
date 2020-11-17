@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# FIXME: need VIM >= 8.0, fzf
-
 set -o xtrace
 
 package_add()
@@ -23,17 +21,12 @@ package_add()
     vim -u NONE -c "helptags $package_dir/doc" -c q
 }
 
+# Fedora packages:
+sudo dnf install -y git vim fzf powerline-go powerline-fonts
+
 # bash:
 cp bashrc ~/.bashrc
 cp bash_profile ~/.bash_profile
-
-# liquidprompt:
-if [ ! -d ~/.liquidprompt ]
-then
-    git clone https://github.com/nojhan/liquidprompt.git ~/.liquidprompt
-else
-    git -C ~/.liquidprompt pull
-fi
 
 # vim:
 cp vimrc ~/.vimrc

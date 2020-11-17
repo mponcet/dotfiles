@@ -17,8 +17,13 @@ export PATH
 
 # User specific aliases and functions
 
-# Only load Liquid Prompt in interactive shells, not from a script or from scp
-[[ $- = *i* ]] && source ~/.liquidprompt/liquidprompt
+function _update_ps1() {
+    PS1="$($GOPATH/bin/powerline-go -error $? -hostname-only-if-ssh -cwd-max-depth 3 -modules venv,user,host,ssh,cwd,perms,git,hg,jobs,exit,root,aws,kube,terraform-workspace)"
+}
+
+if [ "$TERM" != "linux" ] && [ -f "$GOPATH/bin/powerline-go" ]; then
+    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+fi
 
 export EDITOR=vim
 
