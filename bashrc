@@ -18,7 +18,14 @@ export PATH
 # User specific aliases and functions
 
 function _update_ps1() {
-    PS1="$($GOPATH/bin/powerline-go -error $? -hostname-only-if-ssh -mode compatible -cwd-mode dironly -modules venv,user,host,ssh,cwd,perms,git,hg,jobs,exit,root,aws,kube,terraform-workspace)"
+    PS1="$($GOPATH/bin/powerline-go -error $? -jobs $(jobs -p | wc -l) -hostname-only-if-ssh -mode compatible -cwd-mode dironly -modules venv,user,host,ssh,cwd,perms,git,hg,jobs,exit,root,aws,kube,terraform-workspace)"
+
+    # Uncomment the following line to automatically clear errors after showing
+    # them once. This not only clears the error for powerline-go, but also for
+    # everything else you run in that shell. Don't enable this if you're not
+    # sure this is what you want.
+
+    #set "?"
 }
 
 if [ "$TERM" != "linux" ] && [ -f "$GOPATH/bin/powerline-go" ]; then
