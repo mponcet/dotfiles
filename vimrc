@@ -53,9 +53,15 @@ nnoremap <c-b> :Buffers<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " colorscheme & lightline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if (has('termguicolors'))
+  set termguicolors
+endif
+
 syntax on
+let g:material_terminal_italics = 1
+let g:material_theme_style = 'lighter'
+let g:lightline = { 'colorscheme': 'material_vim' }
 colorscheme material
-let g:lightline = { 'colorscheme': 'material' }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " syntastic
