@@ -59,7 +59,7 @@ endif
 
 syntax on
 let g:material_terminal_italics = 1
-let g:material_theme_style = 'lighter'
+let g:material_theme_style = 'darker'
 let g:lightline = { 'colorscheme': 'material_vim' }
 colorscheme material
 
