@@ -41,7 +41,7 @@ package_add https://github.com/preservim/nerdtree.git start
 package_add https://github.com/vivien/vim-linux-coding-style.git start
 package_add https://github.com/junegunn/fzf.vim.git start
 package_add https://github.com/vim-syntastic/syntastic.git start
-package_add https://github.com/pearofducks/ansible-vim.git start
+package_add https://github.com/stephpy/vim-yaml.git start
 package_add https://github.com/Vimjas/vim-python-pep8-indent.git start
 package_add https://github.com/ntpeters/vim-better-whitespace start
 package_add https://github.com/rust-lang/rust.vim start
