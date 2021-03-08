@@ -51,18 +51,6 @@ nnoremap <c-p> :FZF<cr>
 nnoremap <c-b> :Buffers<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" syntastic
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " colorscheme & lightline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -72,8 +60,4 @@ if (has('termguicolors'))
 endif
 
 syntax on
-let g:material_terminal_italics = 1
-let g:material_theme_style = 'darker'
-let g:lightline = { 'colorscheme': 'material_vim' }
 autocmd vimenter * colorscheme material
-

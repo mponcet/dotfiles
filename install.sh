@@ -36,11 +36,11 @@ mkdir -p ~/.vim/files/{backup,undo,swap}
 mkdir -p ~/.vim/pack/plugins/{start,opt}
 
 package_add https://github.com/kaicataldo/material.vim opt
-package_add https://github.com/itchyny/lightline.vim.git start
+package_add https://github.com/vim-airline/vim-airline.git start
 package_add https://github.com/preservim/nerdtree.git start
 package_add https://github.com/vivien/vim-linux-coding-style.git start
 package_add https://github.com/junegunn/fzf.vim.git start
-package_add https://github.com/vim-syntastic/syntastic.git start
+package_add https://github.com/dense-analysis/ale.git start
 package_add https://github.com/stephpy/vim-yaml.git start
 package_add https://github.com/Vimjas/vim-python-pep8-indent.git start
 package_add https://github.com/ntpeters/vim-better-whitespace start
