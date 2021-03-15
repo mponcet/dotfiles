@@ -22,7 +22,7 @@ package_add()
 }
 
 # Fedora packages:
-sudo dnf install -y git vim fzf powerline-go powerline-fonts
+sudo dnf install -y git vim fzf powerline-go powerline-fonts nodejs
 
 # bash:
 cp bashrc ~/.bashrc
@@ -45,3 +45,4 @@ package_add https://github.com/stephpy/vim-yaml.git start
 package_add https://github.com/Vimjas/vim-python-pep8-indent.git start
 package_add https://github.com/ntpeters/vim-better-whitespace start
 package_add https://github.com/rust-lang/rust.vim start
+package_add https://github.com/neoclide/coc.nvim start
