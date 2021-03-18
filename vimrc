@@ -47,8 +47,8 @@ let g:fzf_action = {
     \ 'ctrl-s': 'split',
     \ 'ctrl-v': 'vsplit'
     \ }
-nnoremap <c-p> :FZF<cr>
-nnoremap <c-b> :Buffers<cr>
+nnoremap <Leader>f :Files<cr>
+nnoremap <Leader>b :Buffers<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
