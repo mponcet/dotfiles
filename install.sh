@@ -6,8 +6,9 @@ set -o xtrace
 sudo dnf install -y alacritty tmux git neovim fzf powerline-go powerline-fonts nodejs
 
 # bash:
-cp bashrc ~/.bashrc
-cp bash_profile ~/.bash_profile
+cp .bashrc ~/
+cp .bash_profile ~/
+cp .bash_logout ~/
 
 # nvim:
 cp -r .config/nvim ~/.config/
