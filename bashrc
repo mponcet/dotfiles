@@ -45,7 +45,7 @@ alias ll='ls -l --color=auto'
 alias la='ls -la --color=auto'
 alias ls='ls --color=auto'
 
-alias vi='vim'
+alias vi='nvim'
 
 alias xzegrep='xzegrep --color=auto'
 alias xzfgrep='xzfgrep --color=auto'
