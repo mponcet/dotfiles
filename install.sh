@@ -2,17 +2,30 @@
 
 set -o xtrace
 
+distro=$(grep "^ID=" /etc/os-release | cut -d'=' -f2 | sed -e 's/"//g')
+
 install_pwndbg() {
-	curr_dir=$PWD
-	if cd ~/.pwndbg
-	then
-		git pull
-	else
-		git clone --depth 1 https://github.com/pwndbg/pwndbg ~/.pwndbg
-		cd ~/.pwndbg
-	fi
-	./setup.sh
-	cd $curr_dir
+	case $distro in
+	"fedora")
+		if cd ~/.pwndbg
+		then
+			git pull
+		else
+			git clone --depth 1 https://github.com/pwndbg/pwndbg ~/.pwndbg
+			cd ~/.pwndbg
+		fi
+		./setup.sh
+		cd -
+		;;
+	"arch")
+		sudo pacman -S pwndbg
+		echo "source /usr/share/pwndbg/gdbinit.py" > ~/.gdbinit
+		;;
+	*)
+		echo \"$distro\" is not supported
+		exit 1
+		;;
+	esac
 }
 
 install_dnf() {
@@ -26,7 +39,6 @@ install_arch() {
 
 
 # Fedora packages:
-distro=$(grep "^ID=" /etc/os-release | cut -d'=' -f2 | sed -e 's/"//g')
 
 case $distro in
 	"fedora")
