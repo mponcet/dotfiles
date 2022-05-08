@@ -99,7 +99,11 @@ nnoremap <leader>p :Buffers<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " coc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:coc_global_extensions = [ 'coc-clangd', 'coc-sh', 'coc-pyright', 'coc-rust-analyzer' ]
+let g:coc_global_extensions = [ 'coc-clangd',
+				\'coc-sh',
+				\'coc-pyright',
+                                \'coc-rust-analyzer',
+                                \'coc-yaml' ]
 
 " Some servers have issues with backup files, see #649.
 set nobackup
