@@ -26,6 +26,9 @@ fi
 
 unset rc
 
+# bash
+export HISTFILESIZE=50000
+
 function _update_ps1() {
     PS1="$($GOPATH/bin/powerline-go -error $? -jobs $(jobs -p | wc -l) -hostname-only-if-ssh -mode compatible -cwd-mode dironly -modules venv,user,host,ssh,cwd,perms,git,hg,jobs,exit,root,aws,kube,terraform-workspace)"
 
