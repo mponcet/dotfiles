@@ -3,6 +3,7 @@
 set -o xtrace
 
 cp .bashrc ~/
+cp -r .bashrc.d ~/
 cp .bash_profile ~/
 cp .bash_logout ~/
 
