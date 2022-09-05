@@ -45,6 +45,9 @@ require('packer').startup(function(use)
   -- Adds extra functionality over rust analyzer
   use 'simrat39/rust-tools.nvim'
 
+  -- Typescript
+  use 'jose-elias-alvarez/typescript.nvim'
+
   -- Snippet engine
   use 'hrsh7th/vim-vsnip'
 end)
@@ -176,7 +179,7 @@ require('nvim-treesitter.configs').setup {
     },
   },
   indent = {
-    enable = true,
+    enable = false, -- buggy :'(
   },
   textobjects = {
     select = {
@@ -294,12 +297,8 @@ local rt = require("rust-tools")
 
 rt.setup({
   server = {
-    on_attach = function(_, bufnr)
-      -- Hover actions
-      vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-      -- Code action groups
-      vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
-    end,
+    on_attach = on_attach,
+    capabilities = capabilities,
   },
 })
 
@@ -336,16 +335,12 @@ lspconfig.terraformls.setup {
 }
 
 -- tsserver
-local util = require('lspconfig/util')
-lspconfig.tsserver.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  -- https://github.com/neovim/nvim-lspconfig/issues/260#issuecomment-1136290781
-  root_dir = function (pattern)
-    local cwd  = vim.loop.cwd();
-    local root = util.root_pattern('package.json', 'tsconfig.json', '.git')(pattern);
-    return root or cwd;
-  end;
+require("typescript").setup {
+    disable_commands = false, -- prevent the plugin from creating Vim commands
+    debug = false, -- enable debug logging for commands
+    server = { -- pass options to lspconfig's setup method
+        on_attach = on_attach,
+    },
 }
 
 -- yamlls
