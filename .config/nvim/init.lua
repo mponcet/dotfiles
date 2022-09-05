@@ -41,6 +41,8 @@ require('packer').startup(function(use)
   -- cmp Path completion
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-buffer'
+  -- autopairs
+  use 'windwp/nvim-autopairs'
 
   -- Adds extra functionality over rust analyzer
   use 'simrat39/rust-tools.nvim'
@@ -383,5 +385,13 @@ cmp.setup({
     { name = 'buffer' },
   },
 })
+
+-- If you want insert `(` after select function or method item
+require('nvim-autopairs').setup {}
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+cmp.event:on(
+  'confirm_done',
+  cmp_autopairs.on_confirm_done()
+)
 
 -- vim: ts=2 sts=2 sw=2 et
