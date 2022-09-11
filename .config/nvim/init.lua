@@ -17,6 +17,10 @@ require('packer').startup(function(use)
   use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
+  -- bufferline tabs
+  use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
+  -- nvim tree
+  use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons'}
   -- Add git related info in the signs columns and popups
   use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
   -- Highlight, edit, and navigate code using a fast incremental parsing library
@@ -97,6 +101,13 @@ require('lualine').setup {
     section_separators = '',
   },
 }
+
+-- bufferline
+require("bufferline").setup{}
+
+-- nvin tree
+require("nvim-tree").setup{}
+vim.keymap.set('n', '<F2>', ':NvimTreeToggle<CR>')
 
 -- Enable Comment.nvim
 require('Comment').setup()
