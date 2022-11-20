@@ -6,7 +6,8 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 end
 
 local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePost', { command = 'source <afile> | PackerCompile', group = packer_group, pattern = 'init.lua' })
+vim.api.nvim_create_autocmd('BufWritePost',
+  { command = 'source <afile> | PackerCompile', group = packer_group, pattern = 'init.lua' })
 
 require('packer').startup(function(use)
   use 'chriskempson/base16-vim' -- Color scheme
@@ -18,9 +19,9 @@ require('packer').startup(function(use)
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
   -- bufferline tabs
-  use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
+  use { 'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons' }
   -- nvim tree
-  use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons'}
+  use { 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons' }
   -- Add git related info in the signs columns and popups
   use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
   -- Highlight, edit, and navigate code using a fast incremental parsing library
@@ -103,10 +104,10 @@ require('lualine').setup {
 }
 
 -- bufferline
-require("bufferline").setup{}
+require("bufferline").setup {}
 
 -- nvin tree
-require("nvim-tree").setup{}
+require("nvim-tree").setup {}
 vim.keymap.set('n', '<F2>', ':NvimTreeToggle<CR>')
 
 -- Enable Comment.nvim
@@ -266,9 +267,14 @@ local on_attach = function(_, bufnr)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
   vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
   vim.keymap.set('n', '<leader>so', require('telescope.builtin').lsp_document_symbols, opts)
-  vim.api.nvim_create_user_command('Format', function()
-    vim.lsp.buf.formatting()
-  end, {})
+
+  vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, opts)
+  vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+    pattern = { '*.rs' },
+    callback = function()
+      vim.lsp.buf.format({ async = false })
+    end,
+  })
 end
 
 -- nvim-cmp supports additional completion capabilities
@@ -409,11 +415,11 @@ lspconfig.terraformls.setup {
 
 -- tsserver
 require("typescript").setup {
-    disable_commands = false, -- prevent the plugin from creating Vim commands
-    debug = false, -- enable debug logging for commands
-    server = { -- pass options to lspconfig's setup method
-        on_attach = on_attach,
-    },
+  disable_commands = false, -- prevent the plugin from creating Vim commands
+  debug = false, -- enable debug logging for commands
+  server = { -- pass options to lspconfig's setup method
+    on_attach = on_attach,
+  },
 }
 
 -- yamlls
