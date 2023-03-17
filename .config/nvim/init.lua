@@ -1,63 +1,22 @@
--- Install packer
-local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
-
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
+-- Install lazy
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
-local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePost',
-  { command = 'source <afile> | PackerCompile', group = packer_group, pattern = 'init.lua' })
+-- Remap space as leader key
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+vim.g.mapleader = ' '
 
-require('packer').startup(function(use)
-  use 'chriskempson/base16-vim' -- Color scheme
-  use 'wbthomason/packer.nvim' -- Package manager
-  use 'tpope/vim-fugitive' -- Git commands in nvim
-  use 'numToStr/Comment.nvim' -- 'gc' to comment visual regions/lines
-  -- UI to select things (files, grep results, open buffers...)
-  use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
-  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-  use 'nvim-lualine/lualine.nvim' -- Fancier statusline
-  -- bufferline tabs
-  use { 'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons' }
-  -- nvim tree
-  use { 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons' }
-  -- Add git related info in the signs columns and popups
-  use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
-  -- Highlight, edit, and navigate code using a fast incremental parsing library
-  use 'nvim-treesitter/nvim-treesitter'
-  -- Additional textobjects for treesitter
-  use 'nvim-treesitter/nvim-treesitter-textobjects'
-  use {
-    'williamboman/nvim-lsp-installer',
-    {
-      'neovim/nvim-lspconfig',
-      config = function()
-        require('nvim-lsp-installer').setup {}
-      end
-    }
-  }
-  -- Autocompletion framework
-  use 'hrsh7th/nvim-cmp'
-  -- cmp LSP completion
-  use 'hrsh7th/cmp-nvim-lsp'
-  -- cmp Snippet completion
-  use 'hrsh7th/cmp-vsnip'
-  -- cmp Path completion
-  use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-buffer'
-  -- autopairs
-  use 'windwp/nvim-autopairs'
-
-  -- Adds extra functionality over rust analyzer
-  use 'simrat39/rust-tools.nvim'
-
-  -- Typescript
-  use 'jose-elias-alvarez/typescript.nvim'
-
-  -- Snippet engine
-  use 'hrsh7th/vim-vsnip'
-end)
+require("lazy").setup("plugins")
 
 -- Enable relative line number
 vim.wo.relativenumber = true
@@ -112,11 +71,6 @@ vim.keymap.set('n', '<F2>', ':NvimTreeToggle<CR>')
 
 -- Enable Comment.nvim
 require('Comment').setup()
-
--- Remap space as leader key
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -382,7 +336,7 @@ rt.setup({
 })
 
 -- lua lsp
-lspconfig.sumneko_lua.setup {
+lspconfig.lua_ls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
