@@ -49,13 +49,14 @@ return {
     'nvim-treesitter/nvim-treesitter-textobjects'
   },
   {
-    'williamboman/nvim-lsp-installer',
-    {
-      'neovim/nvim-lspconfig',
-      config = function()
-        require('nvim-lsp-installer').setup {}
-      end
-    }
+    "williamboman/mason.nvim",
+    build = ":MasonUpdate" -- :MasonUpdate updates registry contents
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+  },
+  {
+    "neovim/nvim-lspconfig",
   },
   {
     -- Autocompletion framework

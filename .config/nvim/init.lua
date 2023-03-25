@@ -190,17 +190,9 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
--- LSP installer
-require('nvim-lsp-installer').setup({
-  automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
-  ui = {
-    icons = {
-      server_installed = '✓',
-      server_pending = '➜',
-      server_uninstalled = '✗'
-    }
-  }
-})
+-- Mason
+require("mason").setup()
+require("mason-lspconfig").setup()
 
 -- LSP settings
 local lspconfig = require('lspconfig')
