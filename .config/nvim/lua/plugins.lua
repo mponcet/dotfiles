@@ -28,12 +28,12 @@ return {
     -- bufferline tabs
     'akinsho/bufferline.nvim',
     version = "v2.*",
-    dependencies = 'kyazdani42/nvim-web-devicons'
+    dependencies = 'nvim-tree/nvim-web-devicons'
   },
   {
   -- nvim tree
-    'kyazdani42/nvim-tree.lua',
-    dependencies = 'kyazdani42/nvim-web-devicons'
+    'nvim-tree/nvim-tree.lua',
+    dependencies = 'nvim-tree/nvim-web-devicons'
   },
   {
   -- Add git related info in the signs columns and popups
