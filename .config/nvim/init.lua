@@ -30,6 +30,9 @@ vim.o.hlsearch = false
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
+-- Enable clipboard
+vim.o.clipboard = 'unnamedplus'
+
 -- Enable break indent
 vim.o.breakindent = true
 
