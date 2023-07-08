@@ -27,7 +27,7 @@ return {
   {
     -- bufferline tabs
     'akinsho/bufferline.nvim',
-    version = "v2.*",
+    version = "*",
     dependencies = 'nvim-tree/nvim-web-devicons'
   },
   {

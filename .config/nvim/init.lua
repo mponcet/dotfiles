@@ -1,3 +1,7 @@
+-- disable netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Install lazy
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -135,8 +139,9 @@ end)
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles)
 
 -- Treesitter configuration
--- Parsers must be installed manually via :TSInstall
 require('nvim-treesitter.configs').setup {
+  -- A list of parser names, or "all" (the five listed parsers should always be installed)
+  ensure_installed = { "bash", "c", "dockerfile", "json", "lua", "python", "rust", "terraform", "typescript", "vim", "vimdoc" },
   highlight = {
     enable = true, -- false will disable the whole extension
   },
@@ -195,7 +200,9 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
 -- Mason
 require("mason").setup()
-require("mason-lspconfig").setup()
+require("mason-lspconfig").setup({
+  ensure_installed = { "ansiblels", "bashls", "clangd", "dockerls", "jsonls", "lua_ls", "pylsp", "rust_analyzer", "terraformls", "tsserver", "yamlls" }
+})
 
 -- LSP settings
 local lspconfig = require('lspconfig')
@@ -366,6 +373,9 @@ lspconfig.terraformls.setup {
 require("typescript").setup {
   disable_commands = false, -- prevent the plugin from creating Vim commands
   debug = false, -- enable debug logging for commands
+  go_to_source_definition = {
+    fallback = true, -- fall back to standard LSP definition on failure
+  },
   server = { -- pass options to lspconfig's setup method
     on_attach = on_attach,
   },
