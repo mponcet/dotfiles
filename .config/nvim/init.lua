@@ -49,7 +49,7 @@ vim.o.smartcase = true
 
 -- Decrease update time
 vim.o.updatetime = 250
-vim.wo.signcolumn = 'number'
+vim.wo.signcolumn = 'yes'
 
 -- Set colorscheme
 vim.o.termguicolors = true
@@ -72,7 +72,7 @@ require('lualine').setup {
 -- bufferline
 require("bufferline").setup {}
 
--- nvin tree
+-- nvim tree
 require("nvim-tree").setup {}
 vim.keymap.set('n', '<F2>', ':NvimTreeToggle<CR>')
 
