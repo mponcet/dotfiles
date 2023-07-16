@@ -1,31 +1,28 @@
 alias c='clear'
+alias e='nvim'
+alias g='git'
+alias o='xdg-open'
 
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias grep='grep --color=auto'
+if command -v dnf > /dev/null
+then
+	alias di='sudo dnf install -y'
+	alias up='sudo dnf update -y'
+fi
 
-alias l.='ls -d .* --color=auto'
-alias ll='ls -l --color=auto'
-alias la='ls -la --color=auto'
-alias ls='ls --color=auto'
+if command -v exa > /dev/null
+then
+	alias l=exa
+	alias ll='exa -l'
+	alias la='exa -la'
+	alias ls=exa
+else
+	alias l='ls --color=auto'
+	alias ll='ls -l --color=auto'
+	alias la='ls -la --color=auto'
+fi
 
-alias vi='nvim'
-alias vim='nvim'
-alias vimdiff='nvim -d'
-
-alias xzegrep='xzegrep --color=auto'
-alias xzfgrep='xzfgrep --color=auto'
-alias xzgrep='xzgrep --color=auto'
-alias zegrep='zegrep --color=auto'
-alias zfgrep='zfgrep --color=auto'
-alias zgrep='zgrep --color=auto'
-
-alias rm='rm -I --preserve-root'
-
-alias mv='mv -i'
-alias cp='cp -i'
-alias ln='ln -i'
-
-alias chown='chown --preserve-root'
-alias chmod='chmod --preserve-root'
-alias chgrp='chgrp --preserve-root'
+if command -v nvim > /dev/null
+then
+	alias vim='nvim'
+	alias vimdiff='nvim -d'
+fi

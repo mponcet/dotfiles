@@ -18,6 +18,8 @@ cp -r .bashrc.d ~/
 cp .bash_profile ~/
 cp .bash_logout ~/
 
+cp .gitconfig ~/
+
 cp -r .config/nvim ~/.config/
 
 cp -r .config/alacritty ~/.config/

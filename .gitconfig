@@ -1,0 +1,30 @@
+[user]
+	name = Maxime Poncet
+	email = maxime.poncet@gmail.com
+[ui "color"]
+	ui = always
+[color]
+	ui = true
+[core]
+	autocrlf = input
+	safecrlf = true
+[merge]
+	tool = nvim -d
+[alias]
+	c = commit
+	d = diff
+	s = status
+	st = status
+	lg = log --oneline
+	last = log -1 HEAD
+	p = push --force-with-lease
+	sl = stash list
+[pull]
+	ff = only
+[push]
+	default = simple
+[help]
+	autocorrect = 1
+[diff]
+	algorithm = patience
+	compactionHeuristic = true
