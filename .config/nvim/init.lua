@@ -129,6 +129,8 @@ require('telescope').setup {
 
 -- Enable telescope fzf native
 require('telescope').load_extension 'fzf'
+-- Enable telescope file_browser plugin
+require('telescope').load_extension 'file_browser'
 
 -- Enable project.nvim
 require('project_nvim').setup()
@@ -149,6 +151,7 @@ vim.keymap.set('n', '<leader>so', function()
 end)
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles)
 vim.keymap.set('n', '<leader>p', require('telescope').extensions.projects.projects)
+vim.keymap.set('n', '<leader>fb', require('telescope').extensions.file_browser.file_browser, { noremap = true })
 
 -- Treesitter configuration
 require('nvim-treesitter.configs').setup {
