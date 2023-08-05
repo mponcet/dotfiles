@@ -21,6 +21,9 @@ return {
     build = 'make'
   },
   {
+    'cljoly/telescope-repo.nvim',
+  },
+  {
     -- Fancier statusline
     'nvim-lualine/lualine.nvim'
   },

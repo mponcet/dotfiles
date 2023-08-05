@@ -123,6 +123,9 @@ require('telescope').setup {
 -- Enable telescope fzf native
 require('telescope').load_extension 'fzf'
 
+-- Enable telescope repo
+require('telescope').load_extension 'repo'
+
 -- Add leader shortcuts
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers)
 vim.keymap.set('n', '<leader>sf', function()
@@ -137,6 +140,7 @@ vim.keymap.set('n', '<leader>so', function()
   require('telescope.builtin').tags { only_current_buffer = true }
 end)
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles)
+vim.keymap.set('n', '<leader>r', require('telescope').extensions.repo.list)
 
 -- Treesitter configuration
 require('nvim-treesitter.configs').setup {
