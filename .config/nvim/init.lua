@@ -73,7 +73,14 @@ require('lualine').setup {
 require("bufferline").setup {}
 
 -- nvim tree
-require("nvim-tree").setup {}
+require('nvim-tree').setup({
+  sync_root_with_cwd = true,
+  respect_buf_cwd = true,
+  update_focused_file = {
+    enable = true,
+    update_root = true
+  },
+})
 vim.keymap.set('n', '<F2>', ':NvimTreeToggle<CR>')
 
 -- Enable Comment.nvim
@@ -118,22 +125,14 @@ require('telescope').setup {
       },
     },
   },
-  extensions = {
-    repo = {
-      list = {
-        search_dirs = {
-          "~/dev",
-        },
-      },
-    },
-  },
 }
 
 -- Enable telescope fzf native
 require('telescope').load_extension 'fzf'
 
--- Enable telescope repo
-require('telescope').load_extension 'repo'
+-- Enable project.nvim
+require('project_nvim').setup()
+require('telescope').load_extension 'projects'
 
 -- Add leader shortcuts
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers)
@@ -149,7 +148,7 @@ vim.keymap.set('n', '<leader>so', function()
   require('telescope.builtin').tags { only_current_buffer = true }
 end)
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles)
-vim.keymap.set('n', '<leader>r', require('telescope').extensions.repo.list)
+vim.keymap.set('n', '<leader>p', require('telescope').extensions.projects.projects)
 
 -- Treesitter configuration
 require('nvim-treesitter.configs').setup {

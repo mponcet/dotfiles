@@ -21,7 +21,7 @@ return {
     build = 'make'
   },
   {
-    'cljoly/telescope-repo.nvim',
+    'ahmedkhalf/project.nvim',
   },
   {
     -- Fancier statusline
