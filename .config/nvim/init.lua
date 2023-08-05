@@ -118,6 +118,15 @@ require('telescope').setup {
       },
     },
   },
+  extensions = {
+    repo = {
+      list = {
+        search_dirs = {
+          "~/dev",
+        },
+      },
+    },
+  },
 }
 
 -- Enable telescope fzf native
