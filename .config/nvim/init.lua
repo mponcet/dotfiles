@@ -447,4 +447,7 @@ cmp.event:on(
   cmp_autopairs.on_confirm_done()
 )
 
+-- gp.nvim
+require("gp").setup()
+
 -- vim: ts=2 sts=2 sw=2 et
