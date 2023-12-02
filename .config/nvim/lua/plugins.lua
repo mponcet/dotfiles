@@ -25,9 +25,6 @@ return {
     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
   },
   {
-    'ahmedkhalf/project.nvim',
-  },
-  {
     -- Fancier statusline
     'nvim-lualine/lualine.nvim'
   },

@@ -70,14 +70,7 @@ require('lualine').setup {
 require("bufferline").setup {}
 
 -- nvim tree
-require('nvim-tree').setup({
-  sync_root_with_cwd = true,
-  respect_buf_cwd = true,
-  update_focused_file = {
-    enable = true,
-    update_root = true
-  },
-})
+require('nvim-tree').setup {}
 vim.keymap.set('n', '<F2>', ':NvimTreeToggle<CR>')
 
 -- Enable Comment.nvim
@@ -129,10 +122,6 @@ require('telescope').load_extension 'fzf'
 -- Enable telescope file_browser plugin
 require('telescope').load_extension 'file_browser'
 
--- Enable project.nvim
-require('project_nvim').setup()
-require('telescope').load_extension 'projects'
-
 -- Add leader shortcuts
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers)
 vim.keymap.set('n', '<leader>sf', function()
@@ -147,7 +136,6 @@ vim.keymap.set('n', '<leader>so', function()
   require('telescope.builtin').tags { only_current_buffer = true }
 end)
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles)
-vim.keymap.set('n', '<leader>p', require('telescope').extensions.projects.projects)
 vim.keymap.set('n', '<leader>fb', require('telescope').extensions.file_browser.file_browser, { noremap = true })
 
 -- Treesitter configuration
