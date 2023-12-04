@@ -1,0 +1,6 @@
+[submodule "personal"]
+	path = personal
+	url = git@github.com:mponcet/dotfiles-personal.git
+[submodule "bee"]
+	path = bee
+	url = git@github.com:mponcet/dotfiles-bee.git
