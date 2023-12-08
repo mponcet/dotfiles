@@ -24,6 +24,7 @@ require("lazy").setup("plugins")
 
 -- Enable relative line number
 vim.wo.relativenumber = true
+vim.wo.signcolumn = 'yes'
 
 -- Make line numbers default
 vim.wo.number = true
@@ -46,7 +47,6 @@ vim.o.smartcase = true
 
 -- Decrease update time
 vim.o.updatetime = 250
-vim.wo.signcolumn = 'yes'
 
 -- Set colorscheme
 vim.o.termguicolors = true
@@ -59,10 +59,12 @@ vim.o.completeopt = 'menuone,noselect'
 -- Set statusbar
 require('lualine').setup {
   options = {
-    icons_enabled = false,
     theme = 'gruvbox_dark',
-    component_separators = '|',
-    section_separators = '',
+  },
+  sections = {
+    lualine_c = {
+      { 'filename', path=1 }
+    },
   },
 }
 
