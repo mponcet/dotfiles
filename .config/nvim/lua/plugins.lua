@@ -41,51 +41,27 @@ return {
     -- Additional textobjects for treesitter
     'nvim-treesitter/nvim-treesitter-textobjects'
   },
-  {
-    "williamboman/mason.nvim",
-    build = ":MasonUpdate" -- :MasonUpdate updates registry contents
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-  },
-  {
-    "neovim/nvim-lspconfig",
-  },
-  {
-    -- Autocompletion framework
-    'hrsh7th/nvim-cmp'
-  },
-  {
-    -- cmp LSP completion
-    'hrsh7th/cmp-nvim-lsp'
-  },
-  {
-    -- cmp Snippet completion
-    'hrsh7th/cmp-vsnip'
-  },
-  {
-    -- cmp Path completion
-    'hrsh7th/cmp-path'
-  },
-  {
-    'hrsh7th/cmp-buffer'
-  },
+  -- lsp-zero
+  {'williamboman/mason.nvim'},
+  {'williamboman/mason-lspconfig.nvim'},
+  {'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
+  {'neovim/nvim-lspconfig'},
+  {'hrsh7th/cmp-nvim-lsp'},
+  {'hrsh7th/nvim-cmp'},
+  {'L3MON4D3/LuaSnip'},
   {
     -- autopairs
-    'windwp/nvim-autopairs'
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
   },
   {
      -- Adds extra functionality over rust analyzer
     'simrat39/rust-tools.nvim'
   },
-  {
-    -- Typescript
-    'jose-elias-alvarez/typescript.nvim'
-  },
-  {
-    -- Snippet engine
-    'hrsh7th/vim-vsnip'
-  },
+  -- {
+  --   -- Typescript
+  --   'jose-elias-alvarez/typescript.nvim'
+  -- },
   {
     "kawre/leetcode.nvim",
     build = ":TSUpdate html",

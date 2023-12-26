@@ -20,7 +20,7 @@ vim.opt.rtp:prepend(lazypath)
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.g.mapleader = ' '
 
-require("lazy").setup("plugins")
+require('lazy').setup('plugins')
 
 -- Enable relative line number
 vim.wo.relativenumber = true
@@ -56,8 +56,8 @@ vim.cmd [[colorscheme base16-gruvbox-dark-hard]]
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
--- Set statusbar
-require('lualine').setup {
+-- Set statusba
+require('lualine').setup({
   options = {
     theme = 'gruvbox_dark',
   },
@@ -66,7 +66,7 @@ require('lualine').setup {
       { 'filename', path=1 }
     },
   },
-}
+})
 
 -- Enable Comment.nvim
 require('Comment').setup()
@@ -134,9 +134,9 @@ vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles)
 vim.keymap.set('n', '<leader>fb', require('telescope').extensions.file_browser.file_browser, { noremap = true })
 
 -- Treesitter configuration
-require('nvim-treesitter.configs').setup {
+require('nvim-treesitter.configs').setup({
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { "bash", "c", "dockerfile", "json", "lua", "python", "rust", "terraform", "typescript", "vim", "vimdoc" },
+  ensure_installed = { 'bash', 'c', 'dockerfile', 'json', 'lua', 'python', 'rust', 'terraform', 'typescript' },
   highlight = {
     enable = true, -- false will disable the whole extension
   },
@@ -185,7 +185,7 @@ require('nvim-treesitter.configs').setup {
       },
     },
   },
-}
+})
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
@@ -193,244 +193,71 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
--- Mason
-require("mason").setup()
-require("mason-lspconfig").setup({
-  ensure_installed = { "ansiblels", "bashls", "clangd", "dockerls", "jsonls", "lua_ls", "pylsp", "rust_analyzer", "terraformls", "tsserver", "yamlls" }
+-- lsp
+vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+  pattern = { '*.rs' },
+  callback = function()
+    vim.lsp.buf.format({ async = false })
+  end,
 })
 
--- LSP settings
-local lspconfig = require('lspconfig')
-local on_attach = function(_, bufnr)
-  local opts = { buffer = bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-  vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
-  vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
-  vim.keymap.set('n', '<leader>wl', function()
-    vim.inspect(vim.lsp.buf.list_workspace_folders())
-  end, opts)
-  vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
-  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
-  vim.keymap.set('n', '<leader>so', require('telescope.builtin').lsp_document_symbols, opts)
+local lsp_zero = require('lsp-zero')
 
-  vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, opts)
-  vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-    pattern = { '*.rs' },
-    callback = function()
-      vim.lsp.buf.format({ async = false })
-    end,
-  })
-end
+lsp_zero.on_attach(function(client, bufnr)
+  -- see :help lsp-zero-keybindings
+  -- to learn the available actions
+  lsp_zero.default_keymaps({buffer = bufnr})
+end)
 
--- nvim-cmp supports additional completion capabilities
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+require('lspconfig').lua_ls.setup({})
+require('lspconfig').rust_analyzer.setup({})
 
--- ansiblels
-lspconfig.ansiblels.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
+require('mason').setup({})
+require('mason-lspconfig').setup({
+  ensure_installed = {'tsserver', 'rust_analyzer'},
+  handlers = {
+    lsp_zero.default_setup,
+    rust_analyzer = function()
+      local rust_tools = require('rust-tools')
 
--- clangd
-lspconfig.clangd.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-
--- dockerls
-lspconfig.dockerls.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-
--- jsonls
-lspconfig.jsonls.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-
--- pyright
-lspconfig.pyright.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-
--- rust lsp
-local rt = require("rust-tools")
-
-rt.setup({
-  -- automatically call RustReloadWorkspace when writing to a Cargo.toml file.
-  reload_workspace_from_cargo_toml = true,
-
-  -- These apply to the default RustSetInlayHints command
-  inlay_hints = {
-    -- automatically set inlay hints (type hints)
-    -- default: true
-    auto = true,
-    -- Only show inlay hints for the current line
-    only_current_line = false,
-    -- whether to show parameter hints with the inlay hints or not
-    -- default: true
-    show_parameter_hints = true,
-    -- prefix for parameter hints
-    -- default: "<-"
-    parameter_hints_prefix = "<- ",
-    -- prefix for all the other hints (type, chaining)
-    -- default: "=>"
-    other_hints_prefix = "=> ",
-    -- whether to align to the length of the longest line in the file
-    max_len_align = false,
-    -- padding from the left if max_len_align is true
-    max_len_align_padding = 1,
-    -- whether to align to the extreme right or not
-    right_align = false,
-    -- padding from the right if right_align is true
-    right_align_padding = 7,
-    -- The color of the hints
-    highlight = "Comment",
-  },
-
-  server = {
-    on_attach = function(_, bufnr)
-      on_attach(_, bufnr)
-      -- Hover actions
-      -- vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-      -- Code action groups
-      -- vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
-    end,
-    -- all the opts to send to nvim-lspconfig
-    -- these override the defaults set by rust-tools.nvim
-    -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
-    -- https://rust-analyzer.github.io/manual.html#features
-    settings = {
-      ["rust-analyzer"] = {
-        assist = {
-          importEnforceGranularity = true,
-          importPrefix = "crate"
-        },
-        cargo = {
-          allFeatures = true
-        },
-        checkOnSave = {
-          -- default: `cargo check`
-          command = "clippy"
-        },
-        inlayHints = {
-          lifetimeElisionHints = {
-            enable = true,
-            useParameterNames = true
+      rust_tools.setup({
+        server = {
+          on_attach = function(client, bufnr)
+            vim.keymap.set('n', '<leader>ca', rust_tools.hover_actions.hover_actions, {buffer = bufnr})
+          end,
+          settings = {
+            ['rust-analyzer'] = {
+              assist = {
+                importEnforceGranularity = true,
+                importPrefix = 'crate'
+              },
+              cargo = {
+                allFeatures = true
+              },
+              checkOnSave = {
+                -- default: `cargo check`
+                command = 'clippy'
+              },
+              inlayHints = {
+                lifetimeElisionHints = {
+                  enable = true,
+                  useParameterNames = true
+                },
+              },
+            },
           },
-        },
-      },
-    },
-  }
+        }
+      })
+    end
+  },
 })
 
--- lua lsp
-lspconfig.lua_ls.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = { 'vim' },
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file('', true),
-      },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
-      },
-    },
-  },
-}
-
--- terraformls
-lspconfig.terraformls.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-
--- tsserver
-require("typescript").setup {
-  disable_commands = false, -- prevent the plugin from creating Vim commands
-  debug = false, -- enable debug logging for commands
-  go_to_source_definition = {
-    fallback = true, -- fall back to standard LSP definition on failure
-  },
-  server = { -- pass options to lspconfig's setup method
-    on_attach = on_attach,
-  },
-}
-
--- yamlls
-lspconfig.yamlls.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    yaml = {
-      keyOrdering = false
-    }
-  }
-}
-
--- Setup Completion
--- See https://github.com/hrsh7th/nvim-cmp#basic-configuration
 local cmp = require('cmp')
-cmp.setup({
-  -- Enable LSP snippets
-  snippet = {
-    expand = function(args)
-      vim.fn['vsnip#anonymous'](args.body)
-    end,
-  },
-  mapping = {
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    -- Add tab support
-    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-    ['<Tab>'] = cmp.mapping.select_next_item(),
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Insert,
-      select = true,
-    })
-  },
+cmp.setup({})
 
-  -- Installed sources
-  sources = {
-    { name = 'nvim_lsp' },
-    { name = 'vsnip' },
-    { name = 'path' },
-    { name = 'buffer' },
-  },
-})
-
--- If you want insert `(` after select function or method item
-require('nvim-autopairs').setup {}
-local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-cmp.event:on(
-  'confirm_done',
-  cmp_autopairs.on_confirm_done()
-)
+require('nvim-autopairs').setup({})
 
 -- gp.nvim
-require("gp").setup()
+require('gp').setup({})
 
 -- vim: ts=2 sts=2 sw=2 et
