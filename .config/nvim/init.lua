@@ -63,7 +63,7 @@ require('lualine').setup({
   },
   sections = {
     lualine_c = {
-      { 'filename', path=1 }
+      { 'filename', path = 1 }
     },
   },
 })
@@ -101,89 +101,46 @@ require('gitsigns').setup {
 }
 
 -- Telescope
-require('telescope').setup {
-  defaults = {
-    mappings = {
-      i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
-      },
-    },
-  },
-}
+require('telescope').setup({})
 
 -- Enable telescope fzf native
-require('telescope').load_extension 'fzf'
+require('telescope').load_extension('fzf')
 -- Enable telescope file_browser plugin
-require('telescope').load_extension 'file_browser'
+require('telescope').load_extension('file_browser')
 
 -- Add leader shortcuts
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers)
-vim.keymap.set('n', '<leader>sf', function()
-  require('telescope.builtin').find_files { previewer = false }
-end)
-vim.keymap.set('n', '<leader>sb', require('telescope.builtin').current_buffer_fuzzy_find)
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags)
-vim.keymap.set('n', '<leader>st', require('telescope.builtin').tags)
-vim.keymap.set('n', '<leader>sd', require('telescope.builtin').grep_string)
-vim.keymap.set('n', '<leader>sp', require('telescope.builtin').live_grep)
-vim.keymap.set('n', '<leader>so', function()
-  require('telescope.builtin').tags { only_current_buffer = true }
-end)
-vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles)
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader><space>', builtin.buffers)
+vim.keymap.set('n', '<leader>ff', builtin.find_files)
+vim.keymap.set('n', '<C-p>', builtin.git_files)
+vim.keymap.set('n', '<leader>fg', builtin.grep_string)
 vim.keymap.set('n', '<leader>fb', require('telescope').extensions.file_browser.file_browser, { noremap = true })
 
 -- Treesitter configuration
 require('nvim-treesitter.configs').setup({
-  -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { 'bash', 'c', 'dockerfile', 'json', 'lua', 'python', 'rust', 'terraform', 'typescript' },
+  -- A list of parser names, or "all"
+  ensure_installed = { 'bash', 'c', 'dockerfile', 'json', 'lua', 'python', 'rust', 'terraform', 'typescript', 'vimdoc' },
+
+  -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+
+  -- Automatically install missing parsers when entering buffer
+  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+  auto_install = true,
+
   highlight = {
-    enable = true, -- false will disable the whole extension
-  },
-  incremental_selection = {
+    -- `false` will disable the whole extension
     enable = true,
-    keymaps = {
-      init_selection = 'gnn',
-      node_incremental = 'grn',
-      scope_incremental = 'grc',
-      node_decremental = 'grm',
-    },
+
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
   },
+
   indent = {
     enable = false, -- buggy :'(
-  },
-  textobjects = {
-    select = {
-      enable = true,
-      lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-      keymaps = {
-        -- You can use the capture groups defined in textobjects.scm
-        ['af'] = '@function.outer',
-        ['if'] = '@function.inner',
-        ['ac'] = '@class.outer',
-        ['ic'] = '@class.inner',
-      },
-    },
-    move = {
-      enable = true,
-      set_jumps = true, -- whether to set jumps in the jumplist
-      goto_next_start = {
-        [']m'] = '@function.outer',
-        [']]'] = '@class.outer',
-      },
-      goto_next_end = {
-        [']M'] = '@function.outer',
-        [']['] = '@class.outer',
-      },
-      goto_previous_start = {
-        ['[m'] = '@function.outer',
-        ['[['] = '@class.outer',
-      },
-      goto_previous_end = {
-        ['[M'] = '@function.outer',
-        ['[]'] = '@class.outer',
-      },
-    },
   },
 })
 
@@ -191,7 +148,7 @@ require('nvim-treesitter.configs').setup({
 local lsp_zero = require('lsp-zero')
 
 lsp_zero.on_attach(function(client, bufnr)
-  lsp_zero.default_keymaps({buffer = bufnr})
+  lsp_zero.default_keymaps({ buffer = bufnr })
 end)
 
 lsp_zero.format_on_save({
@@ -200,42 +157,47 @@ lsp_zero.format_on_save({
     timeout_ms = 10000,
   },
   servers = {
-    ['tsserver'] = {'javascript', 'typescript'},
-    ['rust_analyzer'] = {'rust'},
+    ['tsserver'] = { 'javascript', 'typescript' },
+    ['rust_analyzer'] = { 'rust' },
   }
 })
 
-require('lspconfig').lua_ls.setup({})
+require('lspconfig').lua_ls.setup({
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { 'vim' }
+      }
+    }
+  }
+})
+
 require('lspconfig').rust_analyzer.setup({})
 
 local rust_analyzer = function()
-      local rust_tools = require('rust-tools')
+  local rust_tools = require('rust-tools')
 
-      rust_tools.setup({
-        server = {
-          settings = {
-            ['rust-analyzer'] = {
-              checkOnSave = {
-                -- default: `cargo check`
-                command = 'clippy'
-              },
-            },
+  rust_tools.setup({
+    server = {
+      settings = {
+        ['rust-analyzer'] = {
+          checkOnSave = {
+            -- default: `cargo check`
+            command = 'clippy'
           },
-        }
-      })
-    end
+        },
+      },
+    }
+  })
+end
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = {'tsserver', 'rust_analyzer'},
+  ensure_installed = { 'tsserver', 'rust_analyzer' },
   handlers = {
     lsp_zero.default_setup,
     rust_analyzer = rust_analyzer,
   },
-})
-
-vim.diagnostic.config({
-    virtual_text = true
 })
 
 local cmp = require('cmp')

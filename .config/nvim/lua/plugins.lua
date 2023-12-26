@@ -37,10 +37,6 @@ return {
     -- Highlight, edit, and navigate code using a fast incremental parsing library
     'nvim-treesitter/nvim-treesitter'
   },
-  {
-    -- Additional textobjects for treesitter
-    'nvim-treesitter/nvim-treesitter-textobjects'
-  },
   -- lsp-zero
   {'williamboman/mason.nvim'},
   {'williamboman/mason-lspconfig.nvim'},
