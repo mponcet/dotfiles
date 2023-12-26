@@ -34,6 +34,11 @@ require('lazy').setup({
     "nvim-telescope/telescope-file-browser.nvim",
     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
   },
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" }
+  },
   { 'nvim-lualine/lualine.nvim' },
   {
     'lewis6991/gitsigns.nvim',
@@ -74,10 +79,6 @@ require('lazy').setup({
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-
--- Switch beetween buffers with arrow keys
-vim.keymap.set('n', '<left>', ':bp<CR>')
-vim.keymap.set('n', '<right>', ':bn<CR>')
 
 -- Enable relative line number
 vim.wo.relativenumber = true
