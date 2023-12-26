@@ -187,69 +187,55 @@ require('nvim-treesitter.configs').setup({
   },
 })
 
--- Diagnostic keymaps
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
-
 -- lsp
-vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-  pattern = { '*.rs' },
-  callback = function()
-    vim.lsp.buf.format({ async = false })
-  end,
-})
-
 local lsp_zero = require('lsp-zero')
 
 lsp_zero.on_attach(function(client, bufnr)
-  -- see :help lsp-zero-keybindings
-  -- to learn the available actions
   lsp_zero.default_keymaps({buffer = bufnr})
 end)
+
+lsp_zero.format_on_save({
+  format_opts = {
+    async = false,
+    timeout_ms = 10000,
+  },
+  servers = {
+    ['tsserver'] = {'javascript', 'typescript'},
+    ['rust_analyzer'] = {'rust'},
+  }
+})
 
 require('lspconfig').lua_ls.setup({})
 require('lspconfig').rust_analyzer.setup({})
 
-require('mason').setup({})
-require('mason-lspconfig').setup({
-  ensure_installed = {'tsserver', 'rust_analyzer'},
-  handlers = {
-    lsp_zero.default_setup,
-    rust_analyzer = function()
+local rust_analyzer = function()
       local rust_tools = require('rust-tools')
 
       rust_tools.setup({
         server = {
-          on_attach = function(client, bufnr)
-            vim.keymap.set('n', '<leader>ca', rust_tools.hover_actions.hover_actions, {buffer = bufnr})
-          end,
           settings = {
             ['rust-analyzer'] = {
-              assist = {
-                importEnforceGranularity = true,
-                importPrefix = 'crate'
-              },
-              cargo = {
-                allFeatures = true
-              },
               checkOnSave = {
                 -- default: `cargo check`
                 command = 'clippy'
-              },
-              inlayHints = {
-                lifetimeElisionHints = {
-                  enable = true,
-                  useParameterNames = true
-                },
               },
             },
           },
         }
       })
     end
+
+require('mason').setup({})
+require('mason-lspconfig').setup({
+  ensure_installed = {'tsserver', 'rust_analyzer'},
+  handlers = {
+    lsp_zero.default_setup,
+    rust_analyzer = rust_analyzer,
   },
+})
+
+vim.diagnostic.config({
+    virtual_text = true
 })
 
 local cmp = require('cmp')
