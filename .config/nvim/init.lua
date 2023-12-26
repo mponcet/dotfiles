@@ -68,13 +68,6 @@ require('lualine').setup {
   },
 }
 
--- bufferline
-require("bufferline").setup {}
-
--- nvim tree
-require('nvim-tree').setup {}
-vim.keymap.set('n', '<F2>', ':NvimTreeToggle<CR>')
-
 -- Enable Comment.nvim
 require('Comment').setup()
 

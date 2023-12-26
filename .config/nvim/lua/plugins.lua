@@ -29,17 +29,6 @@ return {
     'nvim-lualine/lualine.nvim'
   },
   {
-    -- bufferline tabs
-    'akinsho/bufferline.nvim',
-    version = "*",
-    dependencies = 'nvim-tree/nvim-web-devicons'
-  },
-  {
-  -- nvim tree
-    'nvim-tree/nvim-tree.lua',
-    dependencies = 'nvim-tree/nvim-web-devicons'
-  },
-  {
   -- Add git related info in the signs columns and popups
     'lewis6991/gitsigns.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' }
