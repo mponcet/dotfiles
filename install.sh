@@ -58,5 +58,6 @@ cp $ENV/.gitconfig $HOME
 
 copy_config_clean nvim
 copy_config_clean alacritty
+copy_config_clean wezterm
 
 cp -r .local/bin/ $HOME/.local
