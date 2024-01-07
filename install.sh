@@ -47,6 +47,8 @@ fi
 install_fonts
 install_packages
 
+go env -w GOPATH=$HOME/.local/share/go
+
 cp .bashrc $HOME
 cp -r .bashrc.d $HOME
 cp .bash_profile $HOME
