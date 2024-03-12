@@ -24,7 +24,7 @@ config.colors = {
     },
 }
 
-config.color_scheme = "Gruvbox Dark Hard"
+config.color_scheme = 'Gruvbox dark, hard (base16)'
 config.font = wezterm.font "Fira Code Nerd Font"
 config.font_size = 9.5
 -- disable ligatures
