@@ -7,7 +7,7 @@ if wezterm.config_builder then
     config = wezterm.config_builder()
 end
 
-config.window_decorations = "RESIZE"
+config.window_decorations = 'RESIZE'
 config.tab_bar_at_bottom = true
 config.hide_tab_bar_if_only_one_tab = true
 config.window_frame = {
@@ -22,6 +22,14 @@ config.colors = {
     tab_bar = {
         inactive_tab_edge = '#575757',
     },
+}
+
+-- fix graphic bug
+config.window_padding = {
+    left = '0cell',
+    right = '0cell',
+    top = '0cell',
+    bottom = '1cell',
 }
 
 config.color_scheme = 'Gruvbox dark, hard (base16)'
