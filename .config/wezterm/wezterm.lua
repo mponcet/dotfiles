@@ -7,7 +7,7 @@ if wezterm.config_builder then
     config = wezterm.config_builder()
 end
 
-config.window_decorations = "NONE"
+config.window_decorations = "RESIZE"
 config.tab_bar_at_bottom = true
 config.hide_tab_bar_if_only_one_tab = true
 config.window_frame = {
