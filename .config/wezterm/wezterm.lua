@@ -8,14 +8,14 @@ if wezterm.config_builder then
 end
 
 config.window_decorations = 'RESIZE'
-config.tab_bar_at_bottom = true
+config.tab_bar_at_bottom = false
 config.hide_tab_bar_if_only_one_tab = true
 config.window_frame = {
     font = wezterm.font { family = 'Gruvbox Dark Hard' },
     font_size = 10.0,
-
     active_titlebar_bg = '#333333',
     inactive_titlebar_bg = '#333333',
+
 }
 
 config.colors = {
@@ -24,12 +24,12 @@ config.colors = {
     },
 }
 
--- fix graphic bug
+-- fix window padding
 config.window_padding = {
-    left = '0cell',
-    right = '0cell',
-    top = '0cell',
-    bottom = '1cell',
+    left = 0,
+    right = 0,
+    top = 0,
+    bottom = '2cell',
 }
 
 config.color_scheme = 'Gruvbox dark, hard (base16)'
