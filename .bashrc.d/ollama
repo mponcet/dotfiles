@@ -1,0 +1,7 @@
+function ollama() {
+    sudo podman run -d --device /dev/kfd --device /dev/dri -e HSA_OVERRIDE_GFX_VERSION="10.3.0" -v ollama:/root/.ollama -p 11434:11434 --name ollama --pull always --replace ollama/ollama:rocm
+
+    curl http://localhost:11434/api/pull -d '{ "name": "llama3" }'
+
+    curl http://localhost:11434/api/pull -d '{ "name": "codeqwen" }'
+}
