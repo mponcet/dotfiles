@@ -42,7 +42,6 @@ return {
         dependencies = {
             { 'hrsh7th/cmp-nvim-lsp' },
             { 'williamboman/mason-lspconfig.nvim' },
-            { 'simrat39/rust-tools.nvim' },
         },
         config = function()
             -- This is where all the LSP shenanigans will live
@@ -65,24 +64,14 @@ return {
                         local lua_opts = lsp_zero.nvim_lua_ls()
                         require('lspconfig').lua_ls.setup(lua_opts)
                     end,
-                    rust_analyzer = function()
-                        local rust_tools = require('rust-tools')
-
-                        rust_tools.setup({
-                            server = {
-                                settings = {
-                                    ['rust-analyzer'] = {
-                                        checkOnSave = {
-                                            -- default: `cargo check`
-                                            command = 'clippy'
-                                        },
-                                    },
-                                },
-                            }
-                        })
-                    end,
+                    rust_analyzer = lsp_zero.noop
                 }
             })
         end
+    },
+    {
+        'mrcjkb/rustaceanvim',
+        version = '^5', -- Recommended
+        lazy = false,   -- This plugin is already lazy
     }
 }
