@@ -50,7 +50,13 @@ return {
                 lsp_zero.default_keymaps({ buffer = bufnr })
                 lsp_zero.buffer_autoformat()
 
-                -- local opts = { buffer = bufnr }
+                local toggle_inlay_hint = function(_, bufnr)
+                    local current_value = vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
+                    vim.lsp.inlay_hint.enable(not current_value, { bufnr = 0 })
+                end
+
+                local opts = { buffer = bufnr }
+                vim.keymap.set('n', '<F3>', toggle_inlay_hint, opts)
                 -- vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
                 -- vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
                 -- vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
