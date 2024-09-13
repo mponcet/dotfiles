@@ -11,14 +11,16 @@ fi
 FONTS_DIR=~/.local/share/fonts
 install_fonts() {
 	mkdir -p $FONTS_DIR
-	nerd_fira_code_fonts_url=$(curl -s https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest|jq '.assets[] | select(.name == "FiraCode.zip") | .browser_download_url')
-	curl -s -O /tmp/FiraCode.zip $nerd_fira_code_fonts_url
+	nerd_fira_code_fonts_url=$(curl -L -s https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest|jq '.assets[] | select(.name == "FiraCode.zip") | .browser_download_url')
+	curl -L -s -o /tmp/FiraCode.zip $nerd_fira_code_fonts_url
 	unzip -o /tmp/FiraCode.zip -d $FONTS_DIR
 }
 
 
-DNF_PACKAGES="curl fzf git jq neovim ripgrep tmux wl-clipboard"
+DNF_PACKAGES="curl eza fzf git jq neovim powerline-go ripgrep tmux wezterm wl-clipboard"
 install_packages() {
+    sudo dnf copr enable wezfurlong/wezterm-nightly -y
+    sudo dnf upgrade -y
     sudo dnf install -y $DNF_PACKAGES
 }
 
@@ -47,6 +49,10 @@ fi
 install_fonts
 install_packages
 
+# rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+# go
+sudo dnf install golang -y
 go env -w GOPATH=$HOME/.local/share/go
 
 cp .bashrc $HOME
