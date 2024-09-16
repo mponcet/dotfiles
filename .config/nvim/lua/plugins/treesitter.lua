@@ -8,7 +8,7 @@ return {
             ensure_installed = { 'bash', 'c', 'dockerfile', 'json', 'lua', 'python', 'rust', 'terraform', 'typescript', 'vimdoc' },
             sync_install = false,
             highlight = { enable = true },
-            indent = { enable = true },
+            indent = { enable = false },
         })
     end
 }
