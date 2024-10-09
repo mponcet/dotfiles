@@ -1,4 +1,3 @@
-shell: bash
 theme: gruvbox
 segments:
   - cwd
