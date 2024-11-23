@@ -1,0 +1,8 @@
+#!/bin/sh
+
+restic-helper backup $HOME \
+    -e $HOME/.var/app/com.valvesoftware.Steam \
+    -e $HOME/.local/share/containers \
+    -e $HOME/.cache \
+    -e $HOME/.cargo \
+    -e $HOME/.npm

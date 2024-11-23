@@ -1,0 +1,8 @@
+#!/bin/sh
+
+export AWS_ACCESS_KEY_ID=$(gopass scaleway/s3/AWS_ACCESS_KEY_ID)
+export AWS_SECRET_ACCESS_KEY=$(gopass scaleway/s3/AWS_SECRET_ACCESS_KEY)
+export RESTIC_REPOSITORY=$(gopass restic/RESTIC_REPOSITORY)
+export RESTIC_PASSWORD=$(gopass restic/RESTIC_PASSWORD)
+
+exec restic $@
