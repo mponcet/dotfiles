@@ -9,6 +9,15 @@ return {
     },
     config = true,
     opts = {
+        adapters = {
+            openai = function()
+                return require("codecompanion.adapters").extend("openai", {
+                    env = {
+                        api_key = "cmd:gopass show --password openai/OPENAI_API_KEY",
+                    },
+                })
+            end,
+        },
         strategies = {
             chat = {
                 adapter = "openai",
