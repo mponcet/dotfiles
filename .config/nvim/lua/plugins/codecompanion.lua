@@ -17,16 +17,36 @@ return {
                     },
                 })
             end,
+            ollama = function()
+                return require("codecompanion.adapters").extend("ollama", {
+                    env = {
+                        url = "http://localhost:11434",
+                        -- api_key = "OLLAMA_API_KEY",
+                    },
+                    headers = {
+                        ["Content-Type"] = "application/json",
+                        -- ["Authorization"] = "Bearer ${api_key}",
+                    },
+                    parameters = {
+                        sync = true,
+                    },
+                    schema = {
+                        model = {
+                            default = "deepseek-coder-v2:16b",
+                        },
+                    },
+                })
+            end,
         },
         strategies = {
             chat = {
-                adapter = "openai",
+                adapter = "ollama",
             },
             inline = {
-                adapter = "openai",
+                adapter = "ollama",
             },
             agent = {
-                adapter = "openai",
+                adapter = "ollama",
             },
         },
     },
