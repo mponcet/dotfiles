@@ -9,45 +9,46 @@ return {
     },
     config = true,
     opts = {
+        strategies = {
+            chat = {
+                adapter = "openai",
+            },
+            inline = {
+                adapter = "openai",
+            },
+        },
+        opts = {
+            stream = true,
+        },
         adapters = {
             openai = function()
-                return require("codecompanion.adapters").extend("openai", {
+                return require("codecompanion.adapters").extend("openai_compatible", {
+                    name = "codestral",
                     env = {
-                        api_key = "cmd:gopass show --password openai/OPENAI_API_KEY",
+                        url = "https://api.mistral.ai",
+                        api_key = os.getenv("MISTRAL_API_KEY"),
+                        chat_url = "/v1/chat/completions"
                     },
-                })
-            end,
-            ollama = function()
-                return require("codecompanion.adapters").extend("ollama", {
-                    env = {
-                        url = "http://localhost:11434",
-                        -- api_key = "OLLAMA_API_KEY",
-                    },
-                    headers = {
-                        ["Content-Type"] = "application/json",
-                        -- ["Authorization"] = "Bearer ${api_key}",
-                    },
-                    parameters = {
-                        sync = true,
+                    handlers = {
+                        form_parameters = function(self, params, messages)
+                            -- codestral doesn't support these in the body
+                            params.stream_options = nil
+                            params.options = nil
+
+                            return params
+                        end,
                     },
                     schema = {
                         model = {
-                            default = "deepseek-coder-v2:16b",
+                            default = "codestral-latest",
+                        },
+                        temperature = {
+                            default = 0.2,
+                            mapping = "parameters", -- not supported in default parameters.options
                         },
                     },
                 })
             end,
-        },
-        strategies = {
-            chat = {
-                adapter = "ollama",
-            },
-            inline = {
-                adapter = "ollama",
-            },
-            agent = {
-                adapter = "ollama",
-            },
         },
     },
     keys = {
