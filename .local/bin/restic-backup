@@ -1,6 +1,9 @@
 #!/bin/sh
 
 restic-helper backup $HOME \
+    -e $HOME/dev \
+    -e $HOME/Downloads \
+    -e $HOME/Videos \
     -e $HOME/.var/app/com.valvesoftware.Steam \
     -e $HOME/.local/share/containers \
     -e $HOME/.cache \
