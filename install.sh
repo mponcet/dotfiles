@@ -17,7 +17,7 @@ install_fonts() {
 }
 
 
-DNF_PACKAGES="curl eza fzf git jq neovim powerline-go ripgrep tmux wezterm wl-clipboard"
+DNF_PACKAGES="curl eza fzf git jq neovim ripgrep wezterm wl-clipboard"
 install_packages() {
     sudo dnf copr enable wezfurlong/wezterm-nightly -y
     sudo dnf upgrade -y
@@ -49,6 +49,8 @@ fi
 install_fonts
 install_packages
 
+# brew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 # rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 # go
