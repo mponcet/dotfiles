@@ -5,7 +5,7 @@ return {
         local configs = require("nvim-treesitter.configs")
 
         configs.setup({
-            ensure_installed = { 'bash', 'c', 'dockerfile', 'json', 'lua', 'python', 'rust', 'terraform', 'typescript', 'vimdoc' },
+            ensure_installed = { 'bash', 'c', 'dockerfile', 'json', 'lua', 'python', 'rust', 'terraform', 'typescript' },
             sync_install = false,
             highlight = { enable = true },
             indent = { enable = false },
