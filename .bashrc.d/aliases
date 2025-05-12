@@ -1,12 +1,12 @@
 alias c='clear'
 alias o='xdg-open'
 
-if command -v exa > /dev/null
+if command -v eza > /dev/null
 then
-	alias l=exa
-	alias ll='exa -l'
-	alias la='exa -la'
-	alias ls=exa
+	alias l=eza
+	alias ll='eza -l'
+	alias la='eza -la'
+	alias ls=eza
 else
 	alias l='ls --color=auto'
 	alias ll='ls -l --color=auto'
