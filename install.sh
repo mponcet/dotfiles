@@ -35,7 +35,15 @@ sudo dnf install wezterm
 
 # brew
 NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew install eza fzf gcc git neovim ripgrep rustup golang
+brew install eza \
+    fzf \
+    gcc \
+    git \
+    golang \
+    neovim \
+    ripgrep \
+    rustup \
+    tree-sitter
 brew install --cask font-fira-code-nerd-font
 
 rustup default stable
