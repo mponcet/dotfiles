@@ -34,6 +34,8 @@ sudo dnf copr enable wezfurlong/wezterm-nightly -y
 sudo dnf install wezterm
 
 # brew
+sudo dnf group install development-tools
+sudo dnf install procps-ng curl file
 NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew install eza \
     fzf \
