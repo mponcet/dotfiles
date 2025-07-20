@@ -68,7 +68,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     pattern = '*',
 })
 
-vim.o.completeopt = 'menu,menuone,preview'
+vim.o.completeopt = 'menuone,noinsert,noselect'
 
 -- Enable lsp
 local configs = {}
