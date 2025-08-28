@@ -2,31 +2,21 @@
 
 set -o xtrace
 
+link() {
+  mkdir -p "$(dirname "$2")"
+  if [ -e "$2" ]
+  then
+    echo "Skipping $2, already exists."
+  else
+    ln -sf "$1" "$2"
+    echo "Linked $1 to $2"
+  fi
+}
+
 if [ -z "${HOME}" ]
 then
     echo "error: \$HOME undefined"
     exit 1
-fi
-
-__copy_dir_clean() {
-    local src=$1
-    local dst=$2
-    rm -rf $dst
-    cp -r $src $dst
-}
-
-copy_config_clean() {
-    local src=".config/$1"
-    local dst="$HOME/.config/$1"
-    __copy_dir_clean $src $dst
-}
-
-if ! [[ "$1" == +(personal|bee) ]]
-then
-    echo "$0 personal|bee"
-    exit 0
-else
-    ENV=$1
 fi
 
 # wezterm
@@ -52,13 +42,12 @@ rustup default stable
 rustup-init -y
 go env -w GOPATH=$HOME/.local/share/go
 
-cp .bashrc $HOME
-cp -r .bashrc.d $HOME
-cp .bash_profile $HOME
-cp .bash_logout $HOME
-cp $ENV/.gitconfig $HOME
+cp $PWD/.bashrc $HOME/.bashrc
+cp -r $PWD/.bashrc.d $HOME/.bashrc.d
+cp -r $PWD/personal/.gitconfig $HOME/.gitconfig
 
-copy_config_clean nvim
-copy_config_clean wezterm
+link $PWD/.config/nvim $HOME/.config/nvim
+link $PWD/.config/wezterm $HOME/.config/wezterm
+link $PWD/.config/opsline $HOME/.config/opsline
 
 cp -r .local/bin/ $HOME/.local
