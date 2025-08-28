@@ -9,6 +9,6 @@ function _update_ps1() {
     #set "?"
 }
 
-if [ "$TERM" != "linux" ] && [ -f "$GOPATH/bin/powerline-go" ]; then
+if [ "$TERM" != "linux" ] && command -v opsline > /dev/null; then
     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 fi
