@@ -27,11 +27,14 @@ sudo dnf install wezterm
 sudo dnf group install development-tools
 sudo dnf install procps-ng curl file
 NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew install eza \
+brew install  \
+    bitwarden-cli \
+    eza \
     fzf \
     gcc \
     git \
     golang \
+    gopass \
     neovim \
     ripgrep \
     rustup \
@@ -42,9 +45,9 @@ rustup default stable
 rustup-init -y
 go env -w GOPATH=$HOME/.local/share/go
 
-cp $PWD/.bashrc $HOME/.bashrc
-cp -r $PWD/.bashrc.d $HOME/.bashrc.d
-cp -r $PWD/personal/.gitconfig $HOME/.gitconfig
+link $PWD/.bashrc $HOME/.bashrc
+link $PWD/.bashrc.d $HOME/.bashrc.d
+link $PWD/personal/.gitconfig $HOME/.gitconfig
 
 link $PWD/.config/nvim $HOME/.config/nvim
 link $PWD/.config/wezterm $HOME/.config/wezterm

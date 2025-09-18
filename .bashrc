@@ -31,3 +31,4 @@ export HISTSIZE=5000
 export HISTFILESIZE=50000
 export HISTCONTROL=ignoreboth
 export EDITOR=nvim
+. "$HOME/.cargo/env"

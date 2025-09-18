@@ -9,6 +9,7 @@ function _update_ps1() {
     #set "?"
 }
 
+#TODO
 if [ "$TERM" != "linux" ] && command -v opsline > /dev/null; then
     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 fi
