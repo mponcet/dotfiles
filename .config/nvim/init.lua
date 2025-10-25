@@ -111,6 +111,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
         local bufmap = function(mode, rhs, lhs)
             vim.keymap.set(mode, rhs, lhs, { buffer = args.buf })
         end
-        bufmap('n', '<leader>ih', '<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<cr>')
+        bufmap('n', 'ih', '<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<cr>')
+        bufmap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>')
+        bufmap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
     end,
 })
