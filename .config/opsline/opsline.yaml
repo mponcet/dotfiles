@@ -5,6 +5,7 @@ segments:
   - git
   - kube
   - containers
+  - newline
   - root
 cwd:
   dironly: true
