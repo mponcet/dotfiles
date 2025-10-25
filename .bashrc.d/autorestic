@@ -1,0 +1,9 @@
+. <(autorestic completion bash)
+
+function autorestic() {
+    tmpfile=$(mktemp --suffix=.yml)
+    gopass autorestic/config/$(hostname) > $tmpfile
+    command autorestic -c $tmpfile $@
+    rm -f $tmpfile
+}
+
