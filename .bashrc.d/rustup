@@ -1,0 +1,3 @@
+# install rustup: https://rustup.rs/
+source "$HOME/.cargo/env"
+. <(rustup completions bash)

@@ -1,0 +1,1 @@
+alias ollama='podman run --pull newer --detach --security-opt label=type:container_runtime_t --replace --device /dev/kfd --device /dev/dri -e HSA_OVERRIDE_GFX_VERSION="10.3.0" -v ollama:/root/.ollama -p 127.0.0.1:11434:11434 --name ollama ollama/ollama:rocm'

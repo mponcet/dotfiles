@@ -1,0 +1,22 @@
+alias c='clear'
+alias o='xdg-open'
+
+if command -v eza > /dev/null
+then
+	alias l=eza
+	alias ll='eza -l'
+	alias la='eza -la'
+	alias ls=eza
+else
+	alias l='ls --color=auto'
+	alias ll='ls -l --color=auto'
+	alias la='ls -la --color=auto'
+fi
+
+if command -v nvim > /dev/null
+then
+	alias vim='nvim'
+	alias vimdiff='nvim -d'
+fi
+
+alias todo='find ~/dev/gitjournal/ -maxdepth 1 -type f -printf "%f\n"| fzf | xargs -I{} -r nvim ~/dev/gitjournal/{}'
