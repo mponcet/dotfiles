@@ -1,0 +1,18 @@
+#!/bin/sh
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install  \
+    eza \
+    fzf \
+    gcc \
+    golang \
+    gopass \
+    neovim \
+    ripgrep \
+    rustup \
+    tree-sitter
+brew install --cask font-fira-code-nerd-font
+
+rustup default stable
+rustup-init -y
+go env -w GOPATH=$HOME/.local/share/go
