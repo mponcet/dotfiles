@@ -1,9 +1,16 @@
 . <(autorestic completion bash)
 
-function autorestic() {
-    tmpfile=$(mktemp --suffix=.yml)
-    gopass autorestic/config/$(hostname) > $tmpfile
-    command autorestic -c $tmpfile $@
-    rm -f $tmpfile
+function __autorestic_cleanup() {
+    rm -f $autorestic_config
 }
 
+function __autorestic() {
+    autorestic_config=$(mktemp --suffix=.yml)
+    gopass autorestic/config/$(hostname) > $autorestic_config
+    command autorestic -c $autorestic_config $@
+}
+
+function autorestic() {
+    trap __autorestic_cleanup RETURN
+    __autorestic $@
+}
