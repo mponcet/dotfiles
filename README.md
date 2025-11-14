@@ -25,3 +25,24 @@ Create the file `/etc/modprobe.d/disable-asus-wmi.conf` and add this entry :
 ```
 blacklist asus_wmi_sensors
 ```
+
+## Btrbk
+
+Follow instructions at <https://gitub.com/digint/btrbk> and use the following configuration:
+```
+timestamp_format long
+snapshot_preserve_min 1d
+snapshot_preserve 4d
+
+target_preserve_min 7d
+target_preserve 15d 5w 3m
+
+volume /mnt/btr_pool
+  snapshot_dir btrbk_snapshots
+  target /mnt/data/btrbk_backups
+  subvolume home
+
+volume /mnt/data
+#  snapshot_preserve_min 7d
+#  snapshot_preserve 14d
+```
