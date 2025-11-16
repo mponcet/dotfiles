@@ -116,3 +116,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
         bufmap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
     end,
 })
+
+-- Diagnostic
+vim.keymap.set('n', '<leader>d', function()
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+end, { silent = true })
+vim.diagnostic.config({ virtual_text = true })
+vim.diagnostic.enable(true)
