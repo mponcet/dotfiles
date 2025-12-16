@@ -7,10 +7,10 @@ if wezterm.config_builder then
     config = wezterm.config_builder()
 end
 
-config.window_decorations = 'NONE'
-config.window_background_opacity = 0.9
-config.use_fancy_tab_bar = false
-config.hide_tab_bar_if_only_one_tab = true
+config.window_decorations = 'INTEGRATED_BUTTONS|RESIZE'
+config.integrated_title_buttons = { 'Close' }
+-- config.use_fancy_tab_bar = false
+-- config.hide_tab_bar_if_only_one_tab = true
 config.window_frame = {
     font = wezterm.font { family = 'Gruvbox Dark Hard' },
     font_size = 10.0,
