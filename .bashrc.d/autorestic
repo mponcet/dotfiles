@@ -1,4 +1,7 @@
-. <(autorestic completion bash)
+if command -v autorestic >/dev/null 2>&1
+then
+    . <(autorestic completion bash)
+fi
 
 function __autorestic_cleanup() {
     rm -f $autorestic_config

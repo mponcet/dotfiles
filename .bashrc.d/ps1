@@ -1,5 +1,12 @@
 function _update_ps1() {
-    PS1="$(opsline --shell bash --config ~/.config/opsline/opsline.yaml)"
+    PS1=$(opsline --shell bash \
+      --theme gruvbox \
+      --segments cwd,readonly,git,kube,containers,terraform,root \
+      --cwd-dironly \
+      --kube-critical-contexts kind-prod,minikube \
+      --kube-context-aliases "kind-prod:prod,minikube:dev" \
+      --containers-url "unix:/run/user/1000/podman/podman.sock" \
+      --terraform-critical-workspaces prod)
 
     # Uncomment the following line to automatically clear errors after showing
     # them once. This not only clears the error for powerline-go, but also for
@@ -10,6 +17,6 @@ function _update_ps1() {
 }
 
 #TODO
-if [ "$TERM" != "linux" ] && command -v opsline > /dev/null; then
+# if [ "$TERM" != "linux" ] && command -v opsline > /dev/null; then
     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
-fi
+# fi
