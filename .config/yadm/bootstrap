@@ -1,5 +1,7 @@
 #!/bin/sh
 
+yadm sparse-checkout set --no-cone '/*' '!README.md' '!UNLICENSE.md'
+
 sudo rpm-ostree install --idempotent gcc
 command -v gcc || { echo "systemctl reboot is needed"; exit 1; }
 
