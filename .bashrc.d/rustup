@@ -1,3 +1,6 @@
 # install rustup: https://rustup.rs/
-. "$HOME/.cargo/env"
-. <(rustup completions bash)
+if command -v fzf > /dev/null
+then
+    . "$HOME/.cargo/env"
+    . <(rustup completions bash)
+fi
