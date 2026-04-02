@@ -6,3 +6,4 @@
 --     filetypes = { 'rust' },
 --     single_file_support = true,
 -- }
+return {}
