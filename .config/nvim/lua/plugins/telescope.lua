@@ -6,6 +6,7 @@ return {
         { "<leader>ff",      ":Telescope find_files<cr>", { desc = 'Telescope find files' } },
         { "<leader>gf",      ":Telescope git_files<cr>",  { desc = 'Telescop git files' } },
         { "<leader>fg",      ":Telescope live_grep<cr>",  { desc = 'Telescope live grep' } },
-        { "<leader>km",      ":Telescope keymaps<cr>",    { desc = 'Telescope keymaps' } }
+        { "<leader>km",      ":Telescope keymaps<cr>",    { desc = 'Telescope keymaps' } },
+        { "<leader>yy",      ":Telescope neoclip<cr>",    { desc = 'Telescope neoclip' } }
     }
 }
