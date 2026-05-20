@@ -15,15 +15,15 @@ return {
         -- this file can contain specific instructions for your project
         instructions_file = "AGENTS.md",
         -- for example
-        provider = "openrouter_qwen3codernext",
+        provider = "kimi",
         providers = {
-            openrouter_devstral2 = {
+            kimi = {
                 __inherited_from = "openai",
                 endpoint = "https://openrouter.ai/api/v1",
-                model = "mistralai/devstral-2512",
+                model = "moonshotai/kimi-k2.6",
                 api_key_name = "OPENROUTER_API_KEY",
             },
-            openrouter_qwen3codernext = {
+            qwen = {
                 __inherited_from = "openai",
                 endpoint = "https://openrouter.ai/api/v1",
                 model = "qwen/qwen3-coder-next",
