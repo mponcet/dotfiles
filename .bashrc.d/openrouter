@@ -1,0 +1,3 @@
+function export_openrouter_api_key() {
+    export OPENROUTER_API_KEY=$(gopass openrouter/api_key)
+}

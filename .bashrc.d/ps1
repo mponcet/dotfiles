@@ -1,10 +1,15 @@
 function _update_ps1() {
+    if [[ "$PWD" != "$_devwrap_last_pwd" ]]; then
+        command -v devwrap >/dev/null && devwrap
+        _devwrap_last_pwd="$PWD"
+    fi
+
     PS1=$(opsline --shell bash \
       --theme gruvbox \
-      --segments cwd,readonly,git,kube,containers,terraform,root \
+      --segments cwd,readonly,git,kube,containers,terraform,devwrap,root \
       --cwd-dironly \
-      --kube-critical-contexts kind-prod,minikube \
-      --kube-context-aliases "kind-prod:prod,minikube:dev" \
+      --kube-critical-contexts kind-prod \
+      --kube-context-aliases kind-prod:prod \
       --containers-url "unix:/run/user/1000/podman/podman.sock" \
       --terraform-critical-workspaces prod)
 
@@ -16,7 +21,6 @@ function _update_ps1() {
     #set "?"
 }
 
-#TODO
-# if [ "$TERM" != "linux" ] && command -v opsline > /dev/null; then
+if [ "$TERM" != "linux" ] && command -v opsline > /dev/null; then
     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
-# fi
+fi
