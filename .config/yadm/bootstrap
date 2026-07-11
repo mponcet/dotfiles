@@ -13,10 +13,8 @@ brew install  \
     gopass \
     neovim \
     ripgrep \
-    rustup \
     tree-sitter
 brew install --cask font-fira-code-nerd-font
 
-rustup default stable
-rustup-init -y
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
 go env -w GOPATH=$HOME/.local/share/go
