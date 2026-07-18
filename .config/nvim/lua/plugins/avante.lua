@@ -14,19 +14,12 @@ return {
         -- add any opts here
         -- this file can contain specific instructions for your project
         instructions_file = "AGENTS.md",
-        -- for example
-        provider = "kimi",
+        provider = "openrouter",
         providers = {
-            kimi = {
+            openrouter = {
                 __inherited_from = "openai",
                 endpoint = "https://openrouter.ai/api/v1",
-                model = "moonshotai/kimi-k2.6",
-                api_key_name = "OPENROUTER_API_KEY",
-            },
-            qwen = {
-                __inherited_from = "openai",
-                endpoint = "https://openrouter.ai/api/v1",
-                model = "qwen/qwen3-coder-next",
+                model = "qwen/qwen3.6-27b",
                 api_key_name = "OPENROUTER_API_KEY",
             },
         },
