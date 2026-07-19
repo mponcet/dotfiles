@@ -20,7 +20,7 @@ return {
                 __inherited_from = "openai",
                 endpoint = "https://openrouter.ai/api/v1",
                 model = "qwen/qwen3.6-27b",
-                api_key_name = "OPENROUTER_API_KEY",
+                api_key_name = "cmd:gopass show --nosync openrouter/api_key",
             },
         },
     },
