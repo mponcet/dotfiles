@@ -22,6 +22,12 @@ return {
                 model = "qwen/qwen3.6-27b",
                 api_key_name = "cmd:gopass show --nosync openrouter/api_key",
             },
+            local_llama = {
+                __inherited_from = "openai",
+                endpoint = "http://localhost:8080",
+                model = "llama",
+                api_key = "sk-no-key-required",
+            },
         },
     },
     dependencies = {

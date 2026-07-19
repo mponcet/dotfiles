@@ -19,6 +19,18 @@ return {
                     { 'filename', path = 1 }
                 },
             },
-        }
+        },
+        config = function(_, opts)
+            require('lualine').setup(opts)
+
+            -- Hide lualine when Avante is active
+            vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
+                callback = function()
+                    if vim.bo.filetype == 'Avante' then
+                        require('lualine').hide()
+                    end
+                end,
+            })
+        end,
     },
 }
