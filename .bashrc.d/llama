@@ -1,3 +1,41 @@
-alias qwen3.6_a3b='llama-server -hf unsloth/Qwen3.6-35B-A3B-GGUF:UD-Q4_K_M --alias "qwen3.6-35b-a3b" --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 -c 65536'
-alias qwen3.6_27b='llama-server -hf unsloth/Qwen3.6-27B-GGUF:UD-Q4_K_XL --alias "qwen3.6-27b" --temp 0.6 --top-p 0.95 --top-k 20 --presence-penalty 0.0 --min-p 0.00 -c 65536'
+llm-server() {
+  local choice
+  choice=$(printf "%s\n" \
+    "qwen3.6-35b-a3b" \
+    "qwen3.6-27b" \
+  | fzf)
 
+  if [[ -z "$choice" ]]; then
+    return 1
+  fi
+
+  case "$choice" in
+    qwen3.6-35b-a3b)
+      llama-server -hf unsloth/Qwen3.6-35B-A3B-MTP-GGUF:UD-Q4_K_XL --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 -c 65536 --spec-type draft-mtp --spec-draft-n-max 2
+      ;;
+    qwen3.6-27b)
+      llama-server -hf unsloth/Qwen3.6-27B-MTP-GGUF:UD-Q4_K_XL --temp 0.6 --top-p 0.95 --top-k 20 --presence-penalty 0.0 --min-p 0.00 -c 65536 --spec-type draft-mtp --spec-draft-n-max 2
+      ;;
+  esac
+}
+
+llm-cli() {
+  local choice
+  choice=$(printf "%s\n" \
+    "qwen3.6-35b-a3b" \
+    "qwen3.6-27b" \
+  | fzf)
+
+  if [[ -z "$choice" ]]; then
+    return 1
+  fi
+
+  case "$choice" in
+    qwen3.6-35b-a3b)
+      llama-cli -hf "unsloth/Qwen3.6-35B-A3B-MTP-GGUF:UD-Q4_K_XL" --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 -c 32768 --spec-type draft-mtp --spec-draft-n-max 2
+      ;;
+    qwen3.6-27b)
+      llama-cli -hf "unsloth/Qwen3.6-27B-MTP-GGUF:UD-Q4_K_XL" --temp 0.6 --top-p 0.95 --top-k 20 --presence-penalty 0.0 --min-p 0.00 -c 32768 --spec-type draft-mtp --spec-draft-n-max 2
+      ;;
+  esac
+}
