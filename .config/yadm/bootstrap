@@ -3,13 +3,15 @@
 yadm sparse-checkout set --no-cone '/*' '!README.md' '!UNLICENSE.md'
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew install  \
-    eza \
-    fzf \
-    golang \
-    gopass \
-    neovim \
-    ripgrep \
+brew install    \
+    eza         \
+    fzf         \
+    golang      \
+    gopass      \
+    lua         \
+    luarocks    \
+    neovim      \
+    ripgrep     \
     tree-sitter
 brew install --cask font-fira-code-nerd-font
 
