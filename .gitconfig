@@ -1,6 +1,8 @@
 [user]
-	name = Maxime Poncet
-	email = maxime.poncet@gmail.com
+	useConfigOnly = true
+[include]
+    path = "~/.gitconfig.user"
+
 [ui "color"]
 	ui = always
 [color]
