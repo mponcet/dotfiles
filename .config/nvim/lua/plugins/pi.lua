@@ -5,7 +5,7 @@ return {
         { "<leader>ai", "<cmd>PiAskSelection<CR>", mode = "v", desc = "Ask pi (selection)" },
     },
     opts = {
-        tools = { "read", "edit", "write" },
+        tools = { "read", "edit", "write", "grep" },
     },
     init = function()
         -- force pi.nvim to use the notify backend instead of the builtin floating window
